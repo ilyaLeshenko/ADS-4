@@ -57,50 +57,30 @@ int countPairs2(int *arr, int len, int value) {
   }
 
   return count;
-}int findFirst(int *arr, int left, int right, int target) {
-    int first = -1;
-    while (left <= right) {
-        int mid = left + (right - left) / 2;
-        if (arr[mid] >= target) {
-            if (arr[mid] == target) first = mid;
-            right = mid - 1;
-        } else {
-            left = mid + 1;
-        }
-    }
-    return first;
 }
+int countPairs3(int* arr, int len, int value) {
+  int count = 0;
+  for (int i = 0; i < len; i++) {
+    int target = value - arr[i];
+    int left = i + 1;
+    int right = len - 1;
 
-int findLast(int *arr, int left, int right, int target) {
-    int last = -1;
     while (left <= right) {
-        int mid = left + (right - left) / 2;
-        if (arr[mid] <= target) {
-            if (arr[mid] == target) last = mid;
-            left = mid + 1;
-        } else {
-            right = mid - 1;
+      int mid = left + (right - left) / 2;
+      if (arr[mid] == target) {
+        count++;
+        int j = mid + 1;
+        while (j <= right && arr[j] == target) {
+          count++;
+          j++;
         }
+        break;
+      } else if (arr[mid] < target) {
+        left = mid + 1;
+      } else {
+        right = mid - 1;
+      }
     }
-    return last;
-}
-
-int countPairs3(int *arr, int len, int value) {
-    int count = 0;
-    for (int i = 0; i < len; ++i) {
-        // Пропускаем дубликаты для arr[i]
-        if (i > 0 && arr[i] == arr[i - 1]) {
-            continue;
-        }
-        int target = value - arr[i];
-        // Если target меньше следующего элемента, пары не существует
-        if (i < len - 1 && target < arr[i + 1]) {
-            continue;
-        }
-        int first = findFirst(arr, i + 1, len - 1, target);
-        if (first == -1) continue;
-        int last = findLast(arr, first, len - 1, target);
-        count += (last - first + 1);
-    }
-    return count;
+  }
+  return count;
 }
