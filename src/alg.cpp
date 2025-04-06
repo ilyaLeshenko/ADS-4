@@ -16,8 +16,7 @@ int countPairs2(int* arr, int len, int value) {
   while (end > 0) {
     if (arr[end] > value) {
       end--;
-    }
-    else {
+    } else {
       break;
     }
   }
@@ -37,8 +36,7 @@ int Step(int* arr, int left, int right, int value) {
     if (arr[mid] >= value) {
       mright = mid - 1;
       if (arr[mid] == value) first = mid;
-    }
-    else {
+    } else {
       mleft = mid + 1;
     }
   }
@@ -51,8 +49,7 @@ int Step(int* arr, int left, int right, int value) {
     if (arr[mid] <= value) {
       mleft = mid + 1;
       if (arr[mid] == value) last = mid;
-    }
-    else {
+    } else {
       mright = mid - 1;
     }
   }
