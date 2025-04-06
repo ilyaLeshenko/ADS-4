@@ -91,6 +91,7 @@ int countPairs3(int *arr, int len, int value) {
     int count = 0;
     for (int i = 0; i < len; ++i) {
         int target = value - arr[i];
+        if (i < len - 1 && target < arr[i + 1]) continue;
         int first = findFirst(arr, i + 1, len - 1, target);
         if (first == -1) continue;
         int last = findLast(arr, first, len - 1, target);
